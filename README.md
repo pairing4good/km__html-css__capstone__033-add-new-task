@@ -1,26 +1,40 @@
-# 032 Style Rows
+# 033 Add New Task
 
-[![031 Thin Slicing](https://img.youtube.com/vi/58i2jInFdpQ/0.jpg)](https://www.youtube.com/watch?v=58i2jInFdpQ)
+[![032 Customer Feedback](https://img.youtube.com/vi/QR5TNBROwYw/0.jpg)](https://www.youtube.com/watch?v=QR5TNBROwYw)
 
 ```
-Given that multiple tasks exist 
-When I list the tasks 
-Then the task description and task status on each line lines up vertically
-And Each row is underlined in gray
+Given that a description is provided 
+When I add a new task 
+Then a new task is created with that description
+And a status of todo
+```
+
+```
+Given that a description is provided 
+And a status of doing is selected
+When I add a new task 
+Then a new task is created with that description
+And a status of doing
+```
+
+```
+Given that a description is provided 
+And a status of done is selected
+When I add a new task 
+Then a new task is created with that description
+And a status of done
 ```
 
 Steps:
-- The description should take up 90% of the row
-- The status should take up 10% of the row
-- The row should be underlined in gray
-- The status text should be centered within its background color
-- The status should be at least 4em wide but can grow larger
-- The status should be exactly 1em tall
+- Add a text input to the task-form
+- Add a text input placeholder that says "task description"
+- Make the text input required
+- Add a status dropdown to the task-form
+- Add an Add button to the task-form
 
 Resources:
-- https://www.w3schools.com/cssref/css3_pr_flex.asp
-- https://www.w3schools.com/cssref/pr_border-bottom.asp
-- https://www.w3schools.com/cssref/pr_text_text-align.ASP
-- https://www.w3schools.com/cssref/pr_dim_min-width.asp
-- https://www.w3schools.com/cssref/pr_dim_height.asp
-- https://www.w3schools.com/cssref/css_units.asp
+- https://www.w3schools.com/tags/tag_input.asp
+- https://www.w3schools.com/tags/att_input_placeholder.asp
+- https://www.w3schools.com/tags/att_required.asp
+- https://www.w3schools.com/tags/tag_select.asp
+- https://www.w3schools.com/tags/tag_button.asp

@@ -37,64 +37,63 @@ afterEach(async () => {
   await browser.close();
 });
 
-describe('the tasks-description', () => {
-  it('should take 90% of the row', async () => {
-    const matches = await page.$eval('style', (style) => {
-      return style.innerHTML.match(/\.task-description.*{[\s\S][^}]*flex.*:.*90%.*;/g).length;
-    });
-    
-    expect(matches).toEqual(1);
+describe('the task-form', () => {
+  it('should have a text input', async () => {
+    const inputs = await page.$$('#task-form > button[type="submit"]');
+    expect(inputs.length).toBe(1);
   });
 });
 
-describe('the tasks-status', () => {
-  it('should take 10% of the row', async () => {
-    const matches = await page.$eval('style', (style) => {
-      return style.innerHTML.match(/\.task-status.*{[\s\S][^}]*flex.*:.*10%.*;/g).length;
+describe('the text input', () => {      
+  it('should have a placeholder that says "task description"', async () => {
+    const placeholder = await page.$eval('#task-form > input[type="text"]', (textInput) => {
+      return textInput.getAttribute('placeholder');
     });
     
-    expect(matches).toEqual(1);
+    expect(placeholder).toBe("task description");
+  });
+  
+  it('should be required', async () => {
+    const isRequired = await page.$eval('#task-form > input[type="text"]', (textInput) => {
+      return textInput.hasAttribute('required');
+    });
+    
+    expect(isRequired).toBe(true);
   });
 });
 
-describe('each row', () => {
-  it('should be underlined in gray', async () => {
-    const border = await page.$eval('.row', (row) => {
-      let style = window.getComputedStyle(row);
-      return style.getPropertyValue('border-bottom');
-    });
-    
-    expect(border).toContain('px solid rgb(128, 128, 128)');
+describe('the task-form', () => {
+  it('should have a todo drowpdown option', async () => {
+      const inputs = await page.$$('#task-form > select > option[value="todo"]');
+      expect(inputs.length).toBe(1);
   });
 });
 
-describe('the task-status', () => {
-  it('should be centered within its background color', async () => {
-    const textAlign = await page.$eval('.task-status', (taskStatus) => {
-      let style = window.getComputedStyle(taskStatus);
-      return style.getPropertyValue('text-align');
-    });
-    
-    expect(textAlign).toBe('center');
+describe('the task-form', () => {
+  it('should have a doing drowpdown option', async () => {
+    const inputs = await page.$$('#task-form > select > option[value="doing"]');
+      expect(inputs.length).toBe(1);
   });
 });
 
-describe('the tasks-status', () => {
-  it('should be at least 4em wide but can grow larger', async () => {
-    const matches = await page.$eval('style', (style) => {
-      return style.innerHTML.match(/\.task-status.*{[\s\S][^}]*min-width.*:.*4em.*;/g).length;
-    });
-    
-    expect(matches).toEqual(1);
+describe('the task-form', () => {
+  it('should have a done drowpdown option', async () => {
+    const inputs = await page.$$('#task-form > select > option[value="done"]');
+      expect(inputs.length).toBe(1);
   });
 });
 
-describe('the tasks-status', () => {
-  it('should be exactly 1em tall', async () => {
-    const matches = await page.$eval('style', (style) => {
-      return style.innerHTML.match(/\.task-status.*{[\s\S][^}]*height.*:.*1em.*;/g).length;
+describe('the task-form', () => {
+  it('should have an Add button', async () => {
+    const innerTexts = await page.$$eval('#task-form > button[type="submit"]', (inputs) => {
+      let innerTexts = [];
+      for(let i = 0; i < inputs.length; i++){
+        innerTexts.push(inputs[0].innerText)
+      }
+      return innerTexts;
     });
-    
-    expect(matches).toEqual(1);
+    expect(innerTexts.length).toBe(1);
+      
+    expect(innerTexts[0]).toBe("Add");
   });
 });
